@@ -1,0 +1,27 @@
+{
+  "name": "artists",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "run-p install:artists install:genres install:bands install:tracks install:tracks install:users install:favourites",
+    "install:artists": "cd artists && npm i",
+    "install:genres": "cd genres && npm i",
+    "install:bands": "cd bands && npm i",
+    "install:tracks": "cd tracks && npm i",
+    "install:users": "cd users && npm i",
+    "install:favourites": "cd favourites && npm i",
+    "run:artists": "export PORT=3001 && cd artists && npm run start:dev",
+    "run:genres": "export PORT=3002 && cd genres && npm run start:dev",
+    "run:bands": "export PORT=3003 && cd bands && npm run start:dev",
+    "run:tracks": "export PORT=3004 && cd tracks && npm run start:dev",
+    "run:users": "export PORT=3005 && cd users && npm run start:dev",
+    "run:favourites": "export PORT=3006 && cd favourites && npm run start:dev",
+    "run:all": "run-p run:artists run:genres run:bands run:tracks run:users run:favourites"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
+  }
+}
