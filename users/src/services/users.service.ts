@@ -24,7 +24,7 @@ export class UsersService {
         return this.userModel.findById(id).exec();
     }
 
-    async login(loginDto: LoginDto): Promise<string> {
+    async login(loginDto: LoginDto): Promise<{ jwt: string }> {
         const user = await this.userModel.findOne({
             email: loginDto.email,
         }).exec();
@@ -32,14 +32,16 @@ export class UsersService {
         if(user) {
             const match = bcrypt.compare(loginDto.password, user.password);
             if(match) {
-                return this.jwtService.sign({
-                    _id: user._id,
-                    firstName: user.firstName,
-                    lastName: user.lastName,
-                    email: user.email,
-                }, {
-                    secret: process.env.SECRET,
-                });
+                return {
+                    jwt: await this.jwtService.sign({
+                        _id: user._id,
+                        firstName: user.firstName,
+                        lastName: user.lastName,
+                        email: user.email,
+                    }, {
+                        secret: process.env.SECRET,
+                    })
+                }
             }
         }
     }

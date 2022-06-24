@@ -1,20 +1,14 @@
 import {
   Body,
   Controller,
-  Delete,
   Get,
   Param,
   Post,
-  Put,
-  Query,
   Headers,
-  ForbiddenException,
-  UnauthorizedException, HttpException, HttpStatus, BadRequestException
+  UnauthorizedException, HttpException, HttpStatus
 } from '@nestjs/common';
-// import {Users} from "./services/bands.service";
 import {User, UserDocument} from "./schemas/user.schema";
 import {RegisterDto} from "./dto/register.dto";
-// import {LoginDto} from "./dto/update-band.dto";
 import {UsersService} from "./services/users.service";
 import {LoginDto} from "./dto/login.dto";
 
@@ -23,7 +17,7 @@ export class AppController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post('login')
-  login(@Body() loginDto: LoginDto): Promise<string> {
+  login(@Body() loginDto: LoginDto): Promise<{ jwt: string }> {
     return this.usersService.login(loginDto);
   }
 
