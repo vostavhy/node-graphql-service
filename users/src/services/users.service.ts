@@ -1,15 +1,16 @@
 import {Injectable} from "@nestjs/common";
-import {InjectModel, Prop} from "@nestjs/mongoose";
+import {InjectModel} from "@nestjs/mongoose";
 import {User, UserDocument} from "../schemas/user.schema";
 import {Model} from "mongoose";
 import {RegisterDto} from "../dto/register.dto";
 import * as bcrypt from 'bcrypt';
 import {LoginDto} from "../dto/login.dto";
-import { JwtService } from '@nestjs/jwt';
+import {JwtService} from '@nestjs/jwt';
 
 @Injectable()
 export class UsersService {
-    constructor(@InjectModel(User.name) private userModel: Model<UserDocument>, private jwtService: JwtService) {}
+    constructor(@InjectModel(User.name) private userModel: Model<UserDocument>, private jwtService: JwtService) {
+    }
 
     async create(registerDto: RegisterDto): Promise<User> {
         const newUser = {
@@ -29,9 +30,9 @@ export class UsersService {
             email: loginDto.email,
         }).exec();
 
-        if(user) {
+        if (user) {
             const match = bcrypt.compare(loginDto.password, user.password);
-            if(match) {
+            if (match) {
                 return {
                     jwt: await this.jwtService.sign({
                         _id: user._id,

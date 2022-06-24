@@ -1,6 +1,4 @@
-import {IsArray, IsDate, IsEmail, IsInt, IsNotEmpty, IsOptional, IsString, Length} from 'class-validator';
-import {Member} from "../classes/member";
-import {Prop} from "@nestjs/mongoose";
+import {IsArray, IsEmail, IsNotEmpty, IsOptional, IsString, Length} from 'class-validator';
 
 export class RegisterDto {
     @IsString()
