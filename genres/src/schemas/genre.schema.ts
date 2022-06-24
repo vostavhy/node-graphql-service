@@ -1,21 +1,21 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import {Prop, Schema, SchemaFactory} from '@nestjs/mongoose';
+import {Document} from 'mongoose';
 
 export type GenreDocument = Genre & Document;
 
 @Schema()
 export class Genre {
 
-    @Prop({ required: true })
+    @Prop({required: true})
     name: string;
 
-    @Prop({ required: true })
+    @Prop({required: true})
     description: string;
 
-    @Prop({ required: true })
+    @Prop({required: true})
     country: string;
 
-    @Prop({ required: true })
+    @Prop({required: true})
     year: string;
 
     @Prop()

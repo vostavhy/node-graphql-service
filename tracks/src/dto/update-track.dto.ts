@@ -1,4 +1,4 @@
-import {IsArray, IsDate, IsInt, IsNotEmpty, IsOptional, IsString} from 'class-validator';
+import {IsArray, IsInt, IsOptional, IsString} from 'class-validator';
 
 export class UpdateTrackDto {
     @IsString()
@@ -19,7 +19,8 @@ export class UpdateTrackDto {
 
     @IsInt()
     @IsOptional()
-    duration; number;
+    duration;
+    number;
 
     @IsInt()
     @IsOptional()

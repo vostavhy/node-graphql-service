@@ -10,36 +10,37 @@ export class FavoritesService {
     constructor(@InjectModel(Favourite.name) private favouritesModel: Model<FavouriteDocument>) {
     }
 
-    async addToFavourites(addToFavouritesDto: AddToFavouritesDto): Promise<FavouriteDocument> {
-        const user = await this.favouritesModel.findOne({userId: addToFavouritesDto.userId}).exec();
-        if (user) {
-            const favourites = user[addToFavouritesDto.type];
-            if (favourites && Array.isArray(favourites)) {
-                favourites.push(addToFavouritesDto.id);
-            } else {
-                user[addToFavouritesDto.type] = [addToFavouritesDto.id];
-            }
-            return user.save()
-        }
+    async addToFavourites(userId: string, addToFavouritesDto: AddToFavouritesDto): Promise<FavouriteDocument> {
+        let favourites = await this.favouritesModel.findOne({userId}).exec();
 
-        return new this.favouritesModel({
-            userId: addToFavouritesDto.userId,
-            [addToFavouritesDto.type]: [addToFavouritesDto.id]
-        }).save();
+        if (!favourites) {
+            favourites = await new this.favouritesModel({
+                userId,
+                artistsIds: [],
+                bandsIds: [],
+                genresIds: [],
+                tracksIds: [],
+            });
+        }
+        favourites[`${addToFavouritesDto.type}Ids`].push(addToFavouritesDto.id);
+        favourites[`${addToFavouritesDto.type}Ids`] = [...new Set(favourites[`${addToFavouritesDto.type}Ids`])];
+        return favourites.save();
     }
 
-    async remmoveFromFavourites(removeFromFavouritesDto: RemoveFromFavouritesDto): Promise<FavouriteDocument> {
-        const user = await this.favouritesModel.findOne({userId: removeFromFavouritesDto.userId}).exec();
-        if (user) {
-            const favourites = user[removeFromFavouritesDto.type];
-            if (user[removeFromFavouritesDto.type] && Array.isArray(user[removeFromFavouritesDto.type])) {
-                user[removeFromFavouritesDto.type] = user[removeFromFavouritesDto.type].filter(favourite => favourite.id === removeFromFavouritesDto.id);
-            }
-            return user.save()
+    async removeFromFavourites(userId: string, removeFromFavouritesDto: RemoveFromFavouritesDto): Promise<FavouriteDocument> {
+        const favourites = await this.favouritesModel.findOne({userId}).exec();
+        if (favourites) {
+            favourites[`${removeFromFavouritesDto.type}Ids`] = favourites[`${removeFromFavouritesDto.type}Ids`].filter(item => item !== removeFromFavouritesDto.id);
+            return favourites.save()
         }
     }
 
-    async findOne(iserId: string): Promise<FavouriteDocument> {
-        return this.favouritesModel.findOne({iserId});
+    async findOne(userId: string): Promise<FavouriteDocument> {
+        return this.favouritesModel.findOne({userId});
+    }
+
+    async delete(id: string): Promise<FavouriteDocument> {
+        console.log(id);
+        return this.favouritesModel.findByIdAndDelete(id).exec();
     }
 }

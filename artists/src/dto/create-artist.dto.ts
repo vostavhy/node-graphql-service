@@ -1,4 +1,4 @@
-import {IsArray, IsDate, IsInt, IsNotEmpty, IsOptional, IsString} from 'class-validator';
+import {IsArray, IsDate, IsOptional, IsString} from 'class-validator';
 
 export class CreateArtistDto {
 

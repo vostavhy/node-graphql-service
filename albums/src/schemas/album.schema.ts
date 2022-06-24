@@ -1,12 +1,11 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
-import {IsOptional, IsString} from "class-validator";
+import {Prop, Schema, SchemaFactory} from '@nestjs/mongoose';
+import {Document} from 'mongoose';
 
 export type AlbumDocument = Album & Document;
 
 @Schema()
 export class Album {
-    @Prop({ required: true })
+    @Prop({required: true})
     name: string;
 
     @Prop()

@@ -5,7 +5,8 @@ import {Model} from "mongoose";
 
 @Injectable()
 export class GenresService {
-    constructor(@InjectModel(Genre.name) private genreModel: Model<GenreDocument>) {}
+    constructor(@InjectModel(Genre.name) private genreModel: Model<GenreDocument>) {
+    }
 
     async create(createGenreDto: any): Promise<Genre> {
         const createdCat = new this.genreModel(createGenreDto);
@@ -13,10 +14,10 @@ export class GenresService {
     }
 
     async delete(id: string): Promise<any> {
-        return this.genreModel.deleteOne({ _id: id }).exec();
+        return this.genreModel.deleteOne({_id: id}).exec();
     }
 
-    async findAll({ limit, offset }, filter): Promise<Genre[]> {
+    async findAll({limit, offset}, filter): Promise<Genre[]> {
         return this.genreModel.find(filter).limit(limit).skip(limit * offset).exec();
     }
 
@@ -25,6 +26,6 @@ export class GenresService {
     }
 
     async update(id, updateGenreDto: any): Promise<Genre> {
-        return this.genreModel.findOneAndUpdate({ _id: id}, updateGenreDto, {new: true}).exec();
+        return this.genreModel.findOneAndUpdate({_id: id}, updateGenreDto, {new: true}).exec();
     }
 }

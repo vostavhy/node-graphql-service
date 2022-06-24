@@ -1,12 +1,12 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import {Prop, Schema, SchemaFactory} from '@nestjs/mongoose';
+import {Document} from 'mongoose';
 
 export type FavouriteDocument = Favourite & Document;
 
-// @Schema()
+@Schema()
 export class Favourite {
 
-    @Prop({ required: true })
+    @Prop({required: true})
     userId: string;
 
     @Prop()
@@ -16,7 +16,7 @@ export class Favourite {
     genresIds: string[];
 
     @Prop()
-    artistIds: string[];
+    artistsIds: string[];
 
     @Prop()
     tracksIds: string[];

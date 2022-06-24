@@ -7,17 +7,18 @@ import {UpdateTrackDto} from "../dto/update-track.dto";
 
 @Injectable()
 export class TracksService {
-    constructor(@InjectModel(Track.name) private trackModel: Model<TrackDocument>) {}
+    constructor(@InjectModel(Track.name) private trackModel: Model<TrackDocument>) {
+    }
 
     async create(createTrackDto: CreateTrackDto): Promise<Track> {
         return (new this.trackModel(createTrackDto)).save();
     }
 
     async delete(id: string): Promise<any> {
-        return this.trackModel.deleteOne({ _id: id }).exec();
+        return this.trackModel.deleteOne({_id: id}).exec();
     }
 
-    async findAll({ limit, offset }, filter): Promise<Track[]> {
+    async findAll({limit, offset}, filter): Promise<Track[]> {
         return this.trackModel.find(filter).limit(limit).skip(limit * offset).exec();
     }
 
@@ -26,6 +27,6 @@ export class TracksService {
     }
 
     async update(id: string, updateTrackDto: UpdateTrackDto): Promise<Track> {
-        return this.trackModel.findOneAndUpdate({ _id: id }, updateTrackDto, {new: true}).exec();
+        return this.trackModel.findOneAndUpdate({_id: id}, updateTrackDto, {new: true}).exec();
     }
 }

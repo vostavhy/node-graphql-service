@@ -1,5 +1,4 @@
-import {IsArray, IsDate, IsInt, IsNotEmpty, IsOptional, IsString} from 'class-validator';
-import {Prop} from "@nestjs/mongoose";
+import {IsArray, IsInt, IsOptional, IsString} from 'class-validator';
 
 export class CreateTrackDto {
     @IsString()
@@ -18,7 +17,8 @@ export class CreateTrackDto {
     artistsIds: string[];
 
     @IsInt()
-    duration; number;
+    duration;
+    number;
 
     @IsInt()
     released: number;

@@ -3,7 +3,8 @@ import {Injectable} from "@nestjs/common";
 
 @Injectable()
 export class AuthService {
-    constructor(private readonly httpService: HttpService) {}
+    constructor(private readonly httpService: HttpService) {
+    }
 
     verifyToken(token) {
         return this.httpService.post(process.env.VERIFY_TOKEN_URL, {}, {

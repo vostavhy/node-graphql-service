@@ -1,6 +1,7 @@
 # Musicify microservices
 
 This application caontains multiple services that are used to serve for Musicify App. The follwing microservices exists:
+
 - Albums
 - Bands
 - Favourites
@@ -12,8 +13,9 @@ This application caontains multiple services that are used to serve for Musicify
 ## Installation
 
 1. In each microservice copy and rename env.example to .env
-2. If needed apply changes in .env file. Each .env file have _PORT_ variable (by default it's 3000 in each service) and _VERIFY_TOKEN_URL_ (url for jwt verification in Users service)
-3. You can install node modules by: 
+2. If needed apply changes in .env file. Each .env file have _PORT_ variable (by default it's 3000 in each service)
+   and _VERIFY_TOKEN_URL_ (url for jwt verification in Users service)
+3. You can install node modules by:
     ```bash
    # separately in each service folder
    npm i

@@ -1,7 +1,9 @@
-import {IsArray, IsInt, IsNotEmpty, IsOptional} from 'class-validator';
+import {IsString} from 'class-validator';
 
 export class RemoveFromFavouritesDto {
+    @IsString()
     type: 'band' | 'genre' | 'artist' | 'track';
+
+    @IsString()
     id: string;
-    userId: string;
 }

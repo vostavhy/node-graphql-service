@@ -7,23 +7,24 @@ import {UpdateAlbumDto} from "../dto/update-album.dto";
 
 @Injectable()
 export class AlbumsService {
-    constructor(@InjectModel(Album.name) private albumModel: Model<AlbumDocument>) {}
+    constructor(@InjectModel(Album.name) private albumModel: Model<AlbumDocument>) {
+    }
 
     async create(createAlbumDto: CreateAlbumDto): Promise<Album> {
         return (new this.albumModel(createAlbumDto)).save();
     }
 
     async delete(id: string): Promise<any> {
-        return this.albumModel.deleteOne({ _id: id }).exec();
+        return this.albumModel.deleteOne({_id: id}).exec();
     }
 
     async updateImage(id: string, file: Express.Multer.File): Promise<any> {
-        const album = await this.albumModel.findOne({ _id: id }).exec();
+        const album = await this.albumModel.findOne({_id: id}).exec();
         album.image = file.filename;
         return album.save();
     }
 
-    async findAll({ limit, offset }, filter): Promise<Album[]> {
+    async findAll({limit, offset}, filter): Promise<Album[]> {
         return this.albumModel.find(filter).limit(limit).skip(limit * offset).exec();
     }
 
@@ -32,7 +33,7 @@ export class AlbumsService {
     }
 
     async update(id: string, updateAlbumDto: UpdateAlbumDto): Promise<Album> {
-        return this.albumModel.findOneAndUpdate({ _id: id }, updateAlbumDto, {new: true}).exec();
+        return this.albumModel.findOneAndUpdate({_id: id}, updateAlbumDto, {new: true}).exec();
     }
 
     async count(): Promise<number> {

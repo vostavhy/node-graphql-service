@@ -1,4 +1,4 @@
-import {IsArray, IsDate, IsInt, IsNotEmpty, IsOptional, IsString} from 'class-validator';
+import {IsArray, IsOptional, IsString} from 'class-validator';
 import {Member} from "../classes/member";
 
 export class CreateBandDto {
