@@ -1,4 +1,4 @@
-import {IsArray, IsInt, IsOptional, IsString} from 'class-validator';
+import { IsArray, IsInt, IsOptional, IsString } from 'class-validator';
 
 export class UpdateTrackDto {
     @IsString()

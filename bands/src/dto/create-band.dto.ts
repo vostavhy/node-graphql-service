@@ -1,8 +1,7 @@
-import {IsArray, IsOptional, IsString} from 'class-validator';
-import {Member} from "../classes/member";
+import { IsArray, IsOptional, IsString } from 'class-validator';
+import { Member } from '../classes/member';
 
 export class CreateBandDto {
-
     @IsString()
     name: string;
 
@@ -12,19 +11,7 @@ export class CreateBandDto {
 
     @IsArray()
     @IsOptional()
-    yearsActive: string;
-
-    @IsArray()
-    @IsOptional()
-    labels: string;
-
-    @IsArray()
-    @IsOptional()
     members: Member[];
-
-    @IsArray()
-    @IsOptional()
-    pastMembers: string;
 
     @IsString()
     @IsOptional()
@@ -32,9 +19,5 @@ export class CreateBandDto {
 
     @IsArray()
     @IsOptional()
-    genres: string;
-
-    @IsString()
-    @IsOptional()
-    logo: string;
+    genresIds: string[];
 }

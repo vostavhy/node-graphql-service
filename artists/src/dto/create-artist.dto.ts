@@ -1,7 +1,6 @@
-import {IsArray, IsDate, IsOptional, IsString} from 'class-validator';
+import { IsArray, IsDate, IsOptional, IsString } from 'class-validator';
 
 export class CreateArtistDto {
-
     @IsString()
     firstName: string;
 
@@ -21,30 +20,14 @@ export class CreateArtistDto {
     birthPlace: string;
 
     @IsOptional()
-    @IsDate()
-    deathDate: string;
-
-    @IsOptional()
-    @IsString()
-    deathPlace: string;
-
-    @IsOptional()
     @IsString()
     country: string;
 
     @IsOptional()
     @IsArray()
-    bands: string[]
+    bands: string[];
 
     @IsOptional()
     @IsArray()
     instruments: string[];
-
-    @IsOptional()
-    @IsArray()
-    pseudonims: string[]
-
-    @IsOptional()
-    @IsArray()
-    labels: string[];
 }

@@ -1,19 +1,28 @@
-import {Body, Controller, Delete, Get, Param, Post, Put, Query, UseGuards} from '@nestjs/common';
-import {GenresService} from "./services/genres.service";
-import {Genre} from "./schemas/genre.schema";
-import {CreateGenreDto} from "./dto/create-genre.dto";
-import {UpdateGenreDto} from "./dto/update-genre.dto";
-import {AuthGuard} from "./auth/auth.guard";
+import {
+    Body,
+    Controller,
+    Delete,
+    Get,
+    Param,
+    Post,
+    Put,
+    Query,
+    UseGuards,
+} from '@nestjs/common';
+import { GenresService } from './services/genres.service';
+import { Genre } from './schemas/genre.schema';
+import { CreateGenreDto } from './dto/create-genre.dto';
+import { UpdateGenreDto } from './dto/update-genre.dto';
+import { AuthGuard } from './auth/auth.guard';
 
 @Controller('v1/genres')
 export class AppController {
-    constructor(private readonly genresService: GenresService) {
-    }
+    constructor(private readonly genresService: GenresService) {}
 
     @Get()
     all(@Query() query: any): Promise<Genre[]> {
-        const {limit = 5, offset = 0, ...filter} = query;
-        return this.genresService.findAll({limit, offset}, filter);
+        const { limit = 5, offset = 0, ...filter } = query;
+        return this.genresService.findAll({ limit, offset }, filter);
     }
 
     @Get(':id')

@@ -1,4 +1,4 @@
-import {IsArray, IsDate, IsOptional, IsString} from 'class-validator';
+import { IsArray, IsDate, IsOptional, IsString } from 'class-validator';
 
 export class UpdateArtistDto {
     @IsOptional()
@@ -22,30 +22,14 @@ export class UpdateArtistDto {
     birthPlace: string;
 
     @IsOptional()
-    @IsDate()
-    deathDate: string;
-
-    @IsOptional()
-    @IsString()
-    deathPlace: string;
-
-    @IsOptional()
     @IsString()
     country: string;
 
     @IsOptional()
     @IsArray()
-    bands: string[]
+    bands: string[];
 
     @IsOptional()
     @IsArray()
     instruments: string[];
-
-    @IsOptional()
-    @IsArray()
-    pseudonims: string[]
-
-    @IsOptional()
-    @IsArray()
-    labels: string[];
 }

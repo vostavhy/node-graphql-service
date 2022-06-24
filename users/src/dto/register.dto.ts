@@ -1,4 +1,11 @@
-import {IsArray, IsEmail, IsNotEmpty, IsOptional, IsString, Length} from 'class-validator';
+import {
+    IsArray,
+    IsEmail,
+    IsNotEmpty,
+    IsOptional,
+    IsString,
+    Length,
+} from 'class-validator';
 
 export class RegisterDto {
     @IsString()
@@ -32,5 +39,4 @@ export class RegisterDto {
     @IsArray()
     @IsOptional()
     favouriteGenresIds: string[];
-
 }

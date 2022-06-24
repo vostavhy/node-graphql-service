@@ -1,4 +1,4 @@
-import {IsArray, IsNumber, IsOptional, IsString} from 'class-validator';
+import { IsArray, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class UpdateAlbumDto {
     @IsString()
@@ -24,14 +24,6 @@ export class UpdateAlbumDto {
     @IsArray()
     @IsOptional()
     genresIds: string[];
-
-    @IsArray()
-    @IsOptional()
-    labels: string[];
-
-    @IsArray()
-    @IsOptional()
-    producersIds: string[];
 
     @IsArray()
     @IsOptional()

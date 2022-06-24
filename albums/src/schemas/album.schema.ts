@@ -1,11 +1,11 @@
-import {Prop, Schema, SchemaFactory} from '@nestjs/mongoose';
-import {Document} from 'mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document } from 'mongoose';
 
 export type AlbumDocument = Album & Document;
 
 @Schema()
 export class Album {
-    @Prop({required: true})
+    @Prop({ required: true })
     name: string;
 
     @Prop()
@@ -22,12 +22,6 @@ export class Album {
 
     @Prop()
     genresIds: string[];
-
-    @Prop()
-    labels: string[];
-
-    @Prop()
-    producersIds: string[];
 
     @Prop()
     image: string;

@@ -1,15 +1,14 @@
-import {Prop, Schema, SchemaFactory} from '@nestjs/mongoose';
-import {Document} from 'mongoose';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Document } from 'mongoose';
 
 export type ArtistDocument = Artist & Document;
 
 @Schema()
 export class Artist {
-
-    @Prop({required: true})
+    @Prop({ required: true })
     firstName: string;
 
-    @Prop({required: true})
+    @Prop({ required: true })
     secondName: string;
 
     @Prop()
@@ -21,26 +20,14 @@ export class Artist {
     @Prop()
     birthPlace: string;
 
-    @Prop()
-    deathDate: string;
-
-    @Prop()
-    deathPlace: string;
-
-    @Prop({required: true})
+    @Prop({ required: true })
     country: string;
 
     @Prop()
-    bands: string[]
+    bands: string[];
 
     @Prop()
     instruments: string[];
-
-    @Prop()
-    pseudonims: string[]
-
-    @Prop()
-    labels: string[];
 }
 
 export const ArtistSchema = SchemaFactory.createForClass(Artist);

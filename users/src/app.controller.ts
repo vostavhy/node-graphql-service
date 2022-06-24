@@ -7,17 +7,16 @@ import {
     HttpStatus,
     Param,
     Post,
-    UnauthorizedException
+    UnauthorizedException,
 } from '@nestjs/common';
-import {User} from "./schemas/user.schema";
-import {RegisterDto} from "./dto/register.dto";
-import {UsersService} from "./services/users.service";
-import {LoginDto} from "./dto/login.dto";
+import { User } from './schemas/user.schema';
+import { RegisterDto } from './dto/register.dto';
+import { UsersService } from './services/users.service';
+import { LoginDto } from './dto/login.dto';
 
 @Controller('v1/users')
 export class AppController {
-    constructor(private readonly usersService: UsersService) {
-    }
+    constructor(private readonly usersService: UsersService) {}
 
     @Post('login')
     login(@Body() loginDto: LoginDto): Promise<{ jwt: string }> {
@@ -32,7 +31,11 @@ export class AppController {
     @Post('verify')
     async create(@Headers() headers): Promise<User> {
         try {
-            const token = (headers['Authorization'] || headers['authorization'] || '').split(' ')[1];
+            const token = (
+                headers['Authorization'] ||
+                headers['authorization'] ||
+                ''
+            ).split(' ')[1];
             return await this.usersService.verify(token);
         } catch (err) {
             switch (err.message) {
@@ -40,7 +43,10 @@ export class AppController {
                 case 'jwt must be provided':
                     throw new UnauthorizedException();
                 default:
-                    throw new HttpException(err.message, HttpStatus.INTERNAL_SERVER_ERROR);
+                    throw new HttpException(
+                        err.message,
+                        HttpStatus.INTERNAL_SERVER_ERROR,
+                    );
             }
         }
     }

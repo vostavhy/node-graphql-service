@@ -1,20 +1,19 @@
-import {IsArray, IsInt, IsNotEmpty, IsOptional} from 'class-validator';
+import { IsInt, IsNotEmpty, IsOptional } from 'class-validator';
 
 export class CreateGenreDto {
     @IsNotEmpty()
     name: string;
 
     @IsNotEmpty()
+    @IsOptional()
     description: string;
 
     @IsNotEmpty()
+    @IsOptional()
     country: string;
 
     @IsNotEmpty()
     @IsInt()
-    year: string;
-
-    @IsArray()
     @IsOptional()
-    subGenres: string[];
+    year: string;
 }

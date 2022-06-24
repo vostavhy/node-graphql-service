@@ -1,4 +1,4 @@
-import {IsArray, IsInt, IsNotEmpty, IsOptional} from 'class-validator';
+import { IsInt, IsNotEmpty, IsOptional } from 'class-validator';
 
 export class UpdateGenreDto {
     @IsNotEmpty()
@@ -17,8 +17,4 @@ export class UpdateGenreDto {
     @IsInt()
     @IsOptional()
     year: string;
-
-    @IsArray()
-    @IsOptional()
-    subGenres: string[];
 }
