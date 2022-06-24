@@ -6,7 +6,7 @@ import {User, UserSchema} from "./schemas/user.schema";
 import {JwtModule} from "@nestjs/jwt";
 
 @Module({
-  imports: [JwtModule, MongooseModule.forRoot('mongodb://mongoadmin:secret@localhost:27888/?authSource=admin.'), MongooseModule.forFeature([{ name: User.name, schema: UserSchema }])],
+  imports: [JwtModule, MongooseModule.forRoot(process.env.MONGO_URL), MongooseModule.forFeature([{ name: User.name, schema: UserSchema }])],
   controllers: [AppController],
   providers: [UsersService],
 })

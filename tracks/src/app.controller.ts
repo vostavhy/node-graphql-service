@@ -1,36 +1,36 @@
 import {Body, Controller, Delete, Get, Param, Post, Put, Query} from '@nestjs/common';
-import {ArtistsService} from "./services/artists.service";
-import {Artist} from "./schemas/artist.schema";
-import {CreateArtistDto} from "./dto/create-artist.dto";
-import {UpdateArtistDto} from "./dto/update-artist.dto";
+import {TracksService} from "./services/tracks.service";
+import {CreateTrackDto} from "./dto/create-track.dto";
+import {UpdateTrackDto} from "./dto/update-track.dto";
+import {Track} from "./schemas/track.schema";
 
-@Controller('v1/artists')
+@Controller('v1/tracks')
 export class AppController {
-  constructor(private readonly artistsService: ArtistsService) {}
+  constructor(private readonly tracksService: TracksService) {}
 
   @Get()
-  all(@Query() query: any): Promise<Artist[]> {
+  all(@Query() query: any): Promise<Track[]> {
     const { limit = 5, offset = 0, ...filter } = query;
-    return this.artistsService.findAll({ limit, offset }, filter);
+    return this.tracksService.findAll({ limit, offset }, filter);
   }
 
   @Get(':id')
-  getById(@Param() params): Promise<Artist> {
-    return this.artistsService.findOne(params.id);
+  getById(@Param('id') id: string): Promise<Track> {
+    return this.tracksService.findOne(id);
   }
 
   @Post()
-  create(@Body() createGenreDto: CreateArtistDto): Promise<Artist> {
-    return this.artistsService.create(createGenreDto);
+  create(@Body() createGenreDto: CreateTrackDto): Promise<Track> {
+    return this.tracksService.create(createGenreDto);
   }
 
-  @Put()
-  update(@Body() updateGenreDto: UpdateArtistDto){
-    return this.artistsService.update(updateGenreDto);
+  @Put(':id')
+  update(@Param(':id') id: string, @Body() updateTrackDto: UpdateTrackDto): Promise<Track>{
+    return this.tracksService.update(id, updateTrackDto);
   }
 
   @Delete(':id')
-  delete(@Param() params): Promise<Artist> {
-    return this.artistsService.delete(params.id);
+  delete(@Param('id') id): Promise<any> {
+    return this.tracksService.delete(id);
   }
 }

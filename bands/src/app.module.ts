@@ -5,7 +5,7 @@ import {BandsService} from "./services/bands.service";
 import {Band, BandSchema} from "./schemas/band.schema";
 
 @Module({
-  imports: [MongooseModule.forRoot('mongodb://mongoadmin:secret@localhost:27888/?authSource=admin.'), MongooseModule.forFeature([{ name: Band.name, schema: BandSchema }])],
+  imports: [MongooseModule.forRoot(process.env.MONGO_URL), MongooseModule.forFeature([{ name: Band.name, schema: BandSchema }])],
   controllers: [AppController],
   providers: [BandsService],
 })
