@@ -18,7 +18,7 @@ export class Track {
     artistsIds: string[];
 
     @Prop()
-    duration; number;
+    duration: number;
 
     @Prop()
     released: number;
