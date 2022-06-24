@@ -15,14 +15,26 @@ import { CreateArtistDto } from './dto/create-artist.dto';
 import { UpdateArtistDto } from './dto/update-artist.dto';
 import { AuthGuard } from './auth/auth.guard';
 
+interface PaginatedReponse<T> {
+    items: T[];
+    offset: number;
+    limit: number;
+    total: number;
+}
+
 @Controller('v1/artists')
 export class AppController {
     constructor(private readonly artistsService: ArtistsService) {}
 
     @Get()
-    all(@Query() query: any): Promise<Artist[]> {
+    async all(@Query() query: any): Promise<PaginatedReponse<Artist>> {
         const { limit = 5, offset = 0, ...filter } = query;
-        return this.artistsService.findAll({ limit, offset }, filter);
+        return {
+            items: await this.artistsService.findAll({ limit, offset }, filter),
+            limit,
+            offset,
+            total: await this.artistsService.count(filter),
+        };
     }
 
     @Get(':id')

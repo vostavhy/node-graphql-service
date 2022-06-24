@@ -36,4 +36,8 @@ export class BandsService {
             .findOneAndUpdate({ _id: id }, updateBandDto, { new: true })
             .exec();
     }
+
+    async count(filter): Promise<number> {
+        return this.bandModel.count(filter).exec();
+    }
 }

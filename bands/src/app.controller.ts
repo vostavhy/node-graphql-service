@@ -15,14 +15,26 @@ import { CreateBandDto } from './dto/create-band.dto';
 import { UpdateBandDto } from './dto/update-band.dto';
 import { AuthGuard } from './auth/auth.guard';
 
+interface PaginatedReponse<T> {
+    items: T[];
+    offset: number;
+    limit: number;
+    total: number;
+}
+
 @Controller('v1/bands')
 export class AppController {
     constructor(private readonly bandsService: BandsService) {}
 
     @Get()
-    all(@Query() query: any): Promise<Band[]> {
+    async all(@Query() query: any): Promise<PaginatedReponse<Band>> {
         const { limit = 5, offset = 0, ...filter } = query;
-        return this.bandsService.findAll({ limit, offset }, filter);
+        return {
+            items: await this.bandsService.findAll({ limit, offset }, filter),
+            limit,
+            offset,
+            total: await this.bandsService.count(filter),
+        };
     }
 
     @Get(':id')

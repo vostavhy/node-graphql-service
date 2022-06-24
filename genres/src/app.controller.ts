@@ -15,14 +15,26 @@ import { CreateGenreDto } from './dto/create-genre.dto';
 import { UpdateGenreDto } from './dto/update-genre.dto';
 import { AuthGuard } from './auth/auth.guard';
 
+interface PaginatedReponse<T> {
+    items: T[];
+    offset: number;
+    limit: number;
+    total: number;
+}
+
 @Controller('v1/genres')
 export class AppController {
     constructor(private readonly genresService: GenresService) {}
 
     @Get()
-    all(@Query() query: any): Promise<Genre[]> {
+    async all(@Query() query: any): Promise<PaginatedReponse<Genre>> {
         const { limit = 5, offset = 0, ...filter } = query;
-        return this.genresService.findAll({ limit, offset }, filter);
+        return {
+            items: await this.genresService.findAll({ limit, offset }, filter),
+            limit,
+            offset,
+            total: await this.genresService.count(filter),
+        };
     }
 
     @Get(':id')

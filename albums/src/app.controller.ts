@@ -44,7 +44,7 @@ export class AppController {
             items: await this.albumsService.findAll({ limit, offset }, filter),
             offset,
             limit,
-            total: await this.albumsService.count(),
+            total: await this.albumsService.count(filter),
         };
     }
 

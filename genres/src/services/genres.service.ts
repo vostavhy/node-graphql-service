@@ -35,4 +35,8 @@ export class GenresService {
             .findOneAndUpdate({ _id: id }, updateGenreDto, { new: true })
             .exec();
     }
+
+    async count(filter): Promise<number> {
+        return this.genreModel.count(filter).exec();
+    }
 }

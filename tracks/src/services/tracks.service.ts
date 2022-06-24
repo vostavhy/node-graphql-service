@@ -36,4 +36,8 @@ export class TracksService {
             .findOneAndUpdate({ _id: id }, updateTrackDto, { new: true })
             .exec();
     }
+
+    async count(filter): Promise<number> {
+        return this.trackModel.count(filter).exec();
+    }
 }

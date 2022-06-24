@@ -15,14 +15,26 @@ import { UpdateTrackDto } from './dto/update-track.dto';
 import { Track } from './schemas/track.schema';
 import { AuthGuard } from './auth/auth.guard';
 
+interface PaginatedReponse<T> {
+    items: T[];
+    offset: number;
+    limit: number;
+    total: number;
+}
+
 @Controller('v1/tracks')
 export class AppController {
     constructor(private readonly tracksService: TracksService) {}
 
     @Get()
-    all(@Query() query: any): Promise<Track[]> {
+    async all(@Query() query: any): Promise<PaginatedReponse<Track>> {
         const { limit = 5, offset = 0, ...filter } = query;
-        return this.tracksService.findAll({ limit, offset }, filter);
+        return {
+            items: await this.tracksService.findAll({ limit, offset }, filter),
+            limit,
+            offset,
+            total: await this.tracksService.count(filter),
+        };;
     }
 
     @Get(':id')

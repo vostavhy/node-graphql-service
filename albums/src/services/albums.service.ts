@@ -43,7 +43,7 @@ export class AlbumsService {
             .exec();
     }
 
-    async count(): Promise<number> {
-        return this.albumModel.count().exec();
+    async count(filter): Promise<number> {
+        return this.albumModel.count(filter).exec();
     }
 }
