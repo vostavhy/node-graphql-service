@@ -19,11 +19,15 @@
     "run:users": "cd users && npm run start:dev",
     "run:favourites": "cd favourites && npm run start:dev",
     "run:albums": "cd albums && npm run start:dev",
-    "run:all": "run-p run:artists run:genres run:bands run:tracks run:users run:favourites"
+    "run:all": "npm run kill && run-p run:artists run:genres run:bands run:tracks run:users run:favourites",
+    "kill": "kill-port --port 3001,3002,3003,3004,3005,3006,3007"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "npm-run-all": "^4.1.5"
+  },
+  "dependencies": {
+    "kill-port": "^2.0.1"
   }
 }
